@@ -16,7 +16,7 @@ setup(
     long_description='Long version to be converted from README markdown to ReStructuredText if this ever is uploaded to PyPi. https://stackoverflow.com/a/26737672',
 
     # The project's main homepage.
-    url='https://github.com/IraKorshunova/folk-rnn',
+    #url='https://github.com/IraKorshunova/folk-rnn',
 
     # Author details
     author='',
@@ -61,7 +61,7 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-        'theano',
+        'Theano>=0.8.2',
         'https://github.com/Lasagne/Lasagne/archive/master.zip',
         ],
 
