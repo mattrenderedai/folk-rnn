@@ -3,7 +3,7 @@ import time
 import importlib
 import pickle
 
-from folk_rnn import Folk_RNN
+from lib.folk_rnn import Folk_RNN
 import argparse
 
 parser = argparse.ArgumentParser()
