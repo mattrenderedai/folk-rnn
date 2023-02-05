@@ -62,7 +62,7 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
         'Theano>=0.8.2',
-        'https://github.com/Lasagne/Lasagne/archive/master.zip',
+        # 'Lasagne' Requires dev version - see requirements.txt
         ],
 
     # List additional groups of dependencies here (e.g. development
