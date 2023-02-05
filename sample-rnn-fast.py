@@ -1,11 +1,6 @@
-import sys
 import os
 import time
-import importlib
-if sys.version_info < (3,0):
-    import cPickle as pickle
-else:
-    import pickle
+import pickle
 import numpy as np
 import argparse
 import pdb
@@ -27,8 +22,8 @@ temperature = args.temperature
 ntunes = args.ntunes
 seed = args.seed
 
-with open(metadata_path) as f:
-    metadata = pickle.load(f)
+with open(metadata_path, 'rb') as f:
+    metadata = pickle.load(f, encoding='latin1')
 
 if not os.path.isdir('samples'):
     os.makedirs('samples')
@@ -36,8 +31,7 @@ target_path = "samples/%s-s%d-%.2f-%s.txt" % (
     metadata['experiment_id'], rng_seed, temperature, time.strftime("%Y%m%d-%H%M%S", time.localtime()))
 
 token2idx = metadata['token2idx']
-idx2token = dict((v, k) for k, v in token2idx.iteritems())
-vocab_size = len(token2idx)
+idx2token = {v: k for k, v in token2idx.items()}
 
 start_idx, end_idx = token2idx['<s>'], token2idx['</s>']
 
@@ -127,7 +121,7 @@ with open('vocabulary.txt', 'w') as outfile:
 #for hh in header[1:]:
 #   headerstr+="\", "+"\""+hh
 
-for i in xrange(ntunes):
+for i in iter(range(ntunes)):
     # initialise network
     output=[]
     for jj in range(numlayers):

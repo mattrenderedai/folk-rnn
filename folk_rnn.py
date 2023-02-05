@@ -1,13 +1,7 @@
 import theano
 import lasagne
 import os
-import sys
 import time
-import importlib
-if sys.version_info < (3,0):
-    import cPickle as pickle
-else:
-    import pickle
 import numpy as np
 import theano.tensor as T
 from lasagne.layers import *
@@ -35,7 +29,7 @@ class Folk_RNN:
         one_hot = embedding_size is None
         
         self.token2idx = token2idx
-        self.idx2token = dict((v, k) for k, v in self.token2idx.iteritems())
+        self.idx2token = {v:k for k, v in self.token2idx.items()}
         self.vocab_idxs = np.arange(vocab_size)
         self.start_idx, self.end_idx = self.token2idx['<s>'], self.token2idx['</s>']
         self.rng = np.random.RandomState(random_number_generator_seed)
@@ -53,7 +47,7 @@ class Folk_RNN:
         l_emb = EmbeddingLayer(l_inp, input_size=vocab_size, output_size=emb_output_size, W=W_emb)
         
         main_layers = []
-        for _ in xrange(num_layers):
+        for _ in iter(range(num_layers)):
             if not main_layers:
                 main_layers.append(LSTMLayer(l_emb, num_units=rnn_size,
                                              peepholes=False,
